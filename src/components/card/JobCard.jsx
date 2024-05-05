@@ -1,6 +1,8 @@
 import { Button, Card, CardContent, Typography } from "@mui/material";
 
-const JobCard = () => {
+// eslint-disable-next-line react/prop-types
+const JobCard = ({item}) => {
+ console.log(item)
   return (
     <Card
       className="card"
@@ -48,7 +50,7 @@ const JobCard = () => {
                     color: "#8b8b8b",
                   }}
                 >
-                  Firefly
+                  {item?.companyName}
                 </Typography>
                 <Typography
                   variant="h2"
