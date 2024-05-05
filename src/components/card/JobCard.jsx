@@ -73,7 +73,7 @@ const JobCard = ({ item }) => {
               color: "rgb(77, 89, 106)",
             }}
           >
-            Estimated Salary: ₹{item.minJdSalary ||0} - {item.maxJdSalary} LPA <span>✅</span>
+            Estimated Salary: ${item.minJdSalary ||0} - {item.maxJdSalary} LPA <span>✅</span>
           </p>
 
           <div
@@ -151,7 +151,7 @@ const JobCard = ({ item }) => {
             >
               Minimum Experience
             </h3>
-            <p style={{ margin: 0, fontSize: 14 }}>{item.minExp} years</p>
+            <p style={{ margin: 0, fontSize: 14 }}>{item.minExp ||0} years</p>
           </div>
         </div>
         <Button

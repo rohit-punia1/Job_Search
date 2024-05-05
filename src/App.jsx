@@ -3,13 +3,16 @@ import "./App.css";
 import JobCard from "./components/card/JobCard";
 import { getSearchJObApi } from "./lib/search-job-api";
 import { CircularProgress, Container, Grid } from "@mui/material";
+import SearchJobFilter from "./components/filter/SearchJobFilter";
+import { useSelector } from "react-redux";
 
 function App() {
   const [items, setItems] = useState([]);
+  const [filteredItems,setFilteredItems]=useState([])
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
-  console.log(hasMore, loading);
+
   useEffect(() => {
     setLoading(true);
     getSearchJObApi(page).then((newItems) => {
@@ -49,20 +52,41 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [loading, hasMore]);
 
+  const selectedFilters = useSelector((state) => state.filters);
+  useEffect(()=>{
+  
+    if(Object.keys(selectedFilters).some((key)=>{
+      return selectedFilters[key].length!==0
+    })){
+      
+    for (let key in selectedFilters) {
+      console.log(key)
+      setFilteredItems(items.filter(item => {
+        return selectedFilters[key].some(option => option.value === item[key]);
+        
+    }))
+    }
+  }else{
+    setFilteredItems(items)
+  }
+  },[selectedFilters,items])
+
+
   return (
     <Container maxWidth="lg">
+      <SearchJobFilter/>
       <Grid
         container
         spacing={5}
         gridTemplateColumns="repeat(8, 1fr)"
         gap={5}
         direction="row"
-        justifyContent="space-between"
+        justifyContent="center"
         alignItems="center"
-        style={{margin:"10px 0px"}}
+        style={{margin:"20px 0px"}}
       >
-        {items.map((item) => (
-          <Grid key={item?.jdUid} gridColumn="span 4">
+        {filteredItems.map((item,i) => (
+          <Grid key={i} gridColumn="span 4">
             <JobCard item={item} />
           </Grid>
         ))}
