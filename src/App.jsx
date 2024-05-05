@@ -43,7 +43,7 @@ function App() {
         
       >
         {items.map((item) => (
-          <Grid key={item?.id} item xs={4}>
+          <Grid key={item?.jdUid} item xs={4}>
             <JobCard item={item} />
           </Grid>
         ))}
