@@ -1,4 +1,4 @@
-export const  getSearchJObApi =async({page})=>{
+export const  getSearchJObApi =async(page)=>{
 
     const body = JSON.stringify({
         "limit": 10,

@@ -3,7 +3,7 @@ import { Button, Card, CardContent, Typography } from "@mui/material";
 
 // eslint-disable-next-line react/prop-types
 const JobCard = ({ item }) => {
-  console.log(item);
+
   return (
     <Card
       className="card"
