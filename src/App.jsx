@@ -53,6 +53,7 @@ function App() {
   }, [loading, hasMore]);
 
   const selectedFilters = useSelector((state) => state.filters);
+  console.log(selectedFilters)
   useEffect(()=>{
   
     if(Object.keys(selectedFilters).some((key)=>{
@@ -60,11 +61,16 @@ function App() {
     })){
       
     for (let key in selectedFilters) {
-      console.log(key)
+      if(key==="companyName"){
+        setFilteredItems(items.filter((option) =>
+          option["companyName"]?.toLowerCase().includes(selectedFilters["companyName"].toLowerCase())
+        ))
+      }else{
       setFilteredItems(items.filter(item => {
         return selectedFilters[key].some(option => option.value === item[key]);
         
     }))
+  }
     }
   }else{
     setFilteredItems(items)
